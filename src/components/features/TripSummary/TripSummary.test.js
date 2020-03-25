@@ -7,7 +7,7 @@ describe('Component TripSummary', () => {
     id: 'abc',
     image: 'image.jpg',
     name: 'trip name',
-    tags: [],
+    tags: ['island', 'mountain', 'river'],
     days: 3,
     cost: '$50 000',
   };
@@ -41,11 +41,31 @@ describe('Component TripSummary', () => {
     expect(
       component.find('.details span').at(1).text()).toEqual(expectedCost);
   });
-  Object.keys(props).map(key => {
+  const propsToTest = ['id','name', 'days', 'cost', 'image'];
+  propsToTest.map(key => {
     it(`should crashing without props ${key}`, ()=>{
       const newProps = {...props};
       delete newProps[key];
       expect(() => shallow(<TripSummary {...newProps}/>)).toThrow();
+    });
+  });
+  it('should render correct tags', () => {
+    const component = shallow(
+      <TripSummary {...props}/>
+    );
+    const tags = component.find('.tag');
+    props.tags.map((tag, key) => {
+      expect(tags.at(key).text()).toEqual(tag);
+    });
+  });
+  it('should not render tags wrapper if tags props is [], null or undefined', () => {
+    const newProps = {...props};
+    const tags = [{value:[]}, {value: null}, {value: undefined}];
+    tags.map(tag => {
+      newProps.tags = tag.value;
+      expect(shallow(
+        <TripSummary {...newProps}/>
+      ).find('.tags')).not.toBe();
     });
   });
 });
