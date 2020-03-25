@@ -7,7 +7,7 @@ import Icon from '../../common/Icon/Icon';
 const OrderOptionIcons = ({
   values, currentValue, setOptionValue,
 }) => (
-  <div className={''} >
+  <div>
     {values.map(value => (
       <div 
         className={[
