@@ -24,7 +24,7 @@ class TripListOptions extends React.Component {
     const oldDruration = this.props.filters.duration;
     value = parseInt(value);
     let newDuration = {};
-    if(type == 'from') {
+    if(type === 'from') {
       newDuration = {
         from: value,
         to: oldDruration.to < value 

@@ -12,7 +12,7 @@ const OrderOptionIcons = ({
       <div 
         className={[
           styles.icon, 
-          value.id == currentValue ? styles.iconActive : '',
+          value.id === currentValue ? styles.iconActive : '',
         ].join(' ')} 
         key={value.id}
         onClick={()=>setOptionValue(value.id)}
