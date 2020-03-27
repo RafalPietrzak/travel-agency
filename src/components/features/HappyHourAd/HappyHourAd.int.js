@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import HappyHourAd from './HappyHourAd';
+// import {formatTime} from '../../../utils/formatTime';
 
 const mockProps = {
   title: 'Sample title',
@@ -10,30 +11,6 @@ const select = {
   title: '.title',
   promoDescription: '.promoDescription',
 };
-
-beforeAll(() => {
-  const utilsModule = jest.requireActual('../../../utils/formatTime.js');
-  utilsModule.formatTime = jest.fn(seconds => seconds);
-});
-
-describe('Component HappyHourAd', () => {
-  it('should render without crashing', () => {
-    const component = shallow(
-      <HappyHourAd />
-    );
-    expect(component).toBeTruthy();
-    console.log(component.debug());
-  });
-  it('should render heading and description', () => {
-    const component = shallow(<HappyHourAd />);
-    expect(component.exists(select.title)).toEqual(true);
-    expect(component.exists(select.promoDescription)).toEqual(true);
-  });
-  it('should render correct title', () => {
-    const component = shallow(<HappyHourAd {...mockProps} />);
-    expect(component.find(select.title).text()).toEqual(mockProps.title);
-  });
-});
 
 const trueDate = Date;
 const mockDate = customDate => class extends Date {
@@ -87,16 +64,4 @@ describe('Component HappyHourAd with mocked Date and delay', () => {
   checkDescriptionAfterTime('11:57:58', 2, '120');
   checkDescriptionAfterTime('11:59:58', 1, '1');
   checkDescriptionAfterTime('13:00:00', 60 * 60, 22 * 60 * 60 + '');
-});
-
-describe('Component HappyHourAd with mocked description', () => {
-  checkDescriptionAtTime('12:00:00', mockProps.promoDescription);
-  checkDescriptionAtTime('12:59:59', mockProps.promoDescription);
-});
-
-describe('Component HappyHourAd with mocked Date wich will change to mocked description', () => {
-  checkDescriptionAtTime('11:59:59', '1');
-  checkDescriptionAfterTime('11:59:59', 2, mockProps.promoDescription);
-  checkDescriptionAtTime('12:59:59',  mockProps.promoDescription);
-  checkDescriptionAfterTime('12:59:59', 1, 23 * 60 * 60 + '');
 });
