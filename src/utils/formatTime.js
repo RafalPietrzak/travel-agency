@@ -1,5 +1,9 @@
 export const formatTime = (timeInSeconds) => {
-  if(typeof timeInSeconds === 'undefined' || timeInSeconds < 0) {
+  if(
+    typeof timeInSeconds === 'undefined' 
+    || timeInSeconds < 0 
+    || isNaN(timeInSeconds)
+  ) {
     return null;
   }
   const hours = Math.floor(timeInSeconds/3600).toString().padStart(2, 0);
