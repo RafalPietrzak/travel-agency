@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import HappyHourAd from './HappyHourAd';
-// import {formatTime} from '../../../utils/formatTime';
+import {formatTime} from '../../../utils/formatTime';
 
 const mockProps = {
   title: 'Sample title',
@@ -39,9 +39,9 @@ const checkDescriptionAtTime = (time, expectedDescription) => {
 };
 
 describe('Component HappyHourAd with mocked Date', () => {
-  checkDescriptionAtTime('11:57:58', '122');
-  checkDescriptionAtTime('11:59:59', '1');
-  checkDescriptionAtTime('13:00:00', 23 * 60 * 60 + '');
+  checkDescriptionAtTime('11:57:58', formatTime(122));
+  checkDescriptionAtTime('11:59:59', formatTime(1));
+  checkDescriptionAtTime('13:00:00', formatTime(23 * 60 * 60));
 });
 
 const checkDescriptionAfterTime = (time, delaySeconds, expectedDescription) => {
@@ -61,7 +61,7 @@ const checkDescriptionAfterTime = (time, delaySeconds, expectedDescription) => {
 };
 
 describe('Component HappyHourAd with mocked Date and delay', () => {
-  checkDescriptionAfterTime('11:57:58', 2, '120');
-  checkDescriptionAfterTime('11:59:58', 1, '1');
-  checkDescriptionAfterTime('13:00:00', 60 * 60, 22 * 60 * 60 + '');
+  checkDescriptionAfterTime('11:57:58', 2, formatTime(120));
+  checkDescriptionAfterTime('11:59:58', 1, formatTime(1));
+  checkDescriptionAfterTime('13:00:00', 60 * 60, formatTime(22 * 60 * 60));
 });
