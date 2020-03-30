@@ -12,18 +12,18 @@ import settings from '../../../data/settings';
 
 const sendOrder = (options, tripCost, tripDays, tripName, tripCountry) => {
   let sendIfTrue = true;
-  const worrnings = [];
+  const wornings = [];
   if(options.contact === '') {
     sendIfTrue = false;
-    worrnings.push('Add contact');
+    wornings.push('Add contact');
   }
-  if(options.name === '') {
+  if(!options.name) {
     sendIfTrue = false;
-    worrnings.push('Add name');
+    wornings.push('Add name');
   }
   if(options['start-date'] === '') {
     sendIfTrue = false;
-    worrnings.push('Add start date');
+    wornings.push('Add start date');
   }
   if (sendIfTrue) {
     const totalCost = formatPrice(calculateTotal(tripCost, options));
@@ -54,7 +54,7 @@ const sendOrder = (options, tripCost, tripDays, tripName, tripCountry) => {
         alert(`Order was send!!\nSummary:\n${orderSummary.join('\n')}`);
       });
   } else {
-    alert(worrnings.join('\n'));
+    alert(wornings.join('\n'));
   }
 };
 
