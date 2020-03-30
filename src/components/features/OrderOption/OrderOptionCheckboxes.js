@@ -12,9 +12,8 @@ const OrderOptionCheckboxes = ({
         ...currentValue,
         id,
       ];
-    } else {
-      return currentValue.filter(value => value != id);
     }
+    return currentValue.filter(value => value !== id);
   };
   return (
     <div className={styles.checkboxes} >
