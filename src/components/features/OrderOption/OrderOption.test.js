@@ -85,9 +85,6 @@ for (let type in optionTypes) {
       renderedSubcomponent = subcomponent.dive();
     });
     /* common tests */
-    it('passes dummy test', () => {
-      expect(1).toBe(1);
-    });
     it(`renders ${optionTypes[type]}`, () => {
       expect(subcomponent).toBeTruthy();
       expect(subcomponent.length).toBe(1);
